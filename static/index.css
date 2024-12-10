@@ -1,0 +1,66 @@
+@font-face {
+  font-weight: 900; /* Соответствует значению normal */
+  font-family: Intro;
+  src: url("Intros.woff2");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to right, #ffde59, #ff914d) no-repeat;
+    background-attachment: fixed;
+
+    border: 3px solid #d67d45;
+}
+
+h1 {
+    font-family: 'Intro', sans-serif;
+    font-size: 57px;
+    margin-block: 20px 30px;
+}
+
+.form-block {
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-family: 'Intro', sans-serif;
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    font-family: 'Intro', sans-serif;
+    background: None;
+    border: 3px solid black;
+    font-size: 20px;
+}
+
+button {
+    font-family: 'Intro', sans-serif;
+    background: None;
+    border: 3px solid black;
+    font-size: 22px;
+    margin-bottom: 40px;
+    transition: color 0.4s ease, border-color 0.4s ease;;
+}
+
+button:hover {
+    color: red;
+    border-color: #3e3a3a;
+}

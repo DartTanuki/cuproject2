@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/index.css">
+    <title>Погода по маршруту</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Погода</h1>
+        <form method="POST">
+            <div class="form-block">
+                <label for="start_city">Начальная точка:</label>
+                <input type="text" id="start_city" name="start_city" required>
+            </div>
+
+            <div class="form-block">
+                <label for="end_city">Конечная точка:</label>
+                <input type="text" id="end_city" name="end_city" required>
+            </div>
+            <br>
+            <button type="submit">Получить погоду</button>
+        </form>
+    </div>
+</body>
+</html>
