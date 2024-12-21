@@ -5,14 +5,19 @@ import json
 
 from dash import Dash, html
 
-#  Создаем объект нашего приложения и объект библиотеки Dash.
+#  Создаем объект нашего приложения Flask
 app = Flask(__name__)
-dash_app = Dash(__name__, server=app)
+
+#  Создаем объект библиотеки Dash и первичная настройка. Настраиваем путь, где будет отображаться наша визуализация.
+dash_app = Dash(__name__, server=app, url_base_pathname='/dashboard/')
+dash_app.layout = [html.Div(children='Hello World')]
 
 # API-ключ и ссылка для работы API.
 API_URL = 'http://dataservice.accuweather.com'
 API_KEY = 'cm02hwuwSjzaDH6oXgTX7jO5WIxA5Mal'
+# API_KEY = 'ATmBycESdqJd4ApCeQjXmrDKq2EAIvph'
 
+""" WARNING: Все ответы на вопросы по заданиям я представлю в readme файле для удобства. """
 
 # Функция для ключа города.
 def get_city_key(city_name):
@@ -36,22 +41,23 @@ def get_city_key(city_name):
         return None
 
 
-# Функция для получения погодных данных
-def get_city_weather_data(city):
-    #  Получение ключа города. Используется функция выше.
+#  Функция для получения погодных данных в виде CSV файла
+def get_csv_data(cities):
+    ...
+
+
+def get_city_weather_data(city, days):
     city_key = get_city_key(city)
 
-    url = f'{API_URL}/currentconditions/v1/{city_key}'
+    url = f'{API_URL}/forecasts/v1/daily/{days}day/{city_key}'
     params = {'apikey': API_KEY, 'details': 'true'}
 
-    #  Генерация запроса.
     response = requests.get(url, params=params)
 
-    #  Обработка полученного ответа.
+    print(response.json())
     if response.status_code == 200:
-        return response.json()[0]
-    else:
-        return None
+        return response.json()
+    return None
 
 
 # Функция для оценки неблагоприятных погодных условий
@@ -75,42 +81,23 @@ def index():
         #  Получение городов из формы.
         start_city = request.form['start_city']
         end_city = request.form['end_city']
+        extra_cities = request.form.getlist('extra_city')
 
         # Получение погодных данных для начального города
-        start_weather_data = get_city_weather_data(start_city)
+        start_weather_data = get_city_weather_data(start_city, 1)
 
         # Получение погодных данных для конечного города
-        end_weather_data = get_city_weather_data(end_city)
-
-        if start_weather_data and end_weather_data:
-            # Данные для начального города
-            start_temp = start_weather_data['Temperature']['Metric']['Value']
-            start_wind = start_weather_data['Wind']['Speed']['Metric']['Value']
-            start_precipitation = (start_weather_data['PrecipitationSummary']['Precipitation']['Metric']['Value'] * 100)
-            start_city_result = check_bad_weather(start_temp, start_wind, start_precipitation)
-
-            # Данные для конечного города
-            end_temp = end_weather_data['Temperature']['Metric']['Value']
-            end_speed = end_weather_data['Wind']['Speed']['Metric']['Value']
-            end_precipitation = (end_weather_data['PrecipitationSummary']['Precipitation']['Metric']['Value'] * 100)
-            end_city_result = check_bad_weather(end_temp, end_speed, end_precipitation)
-
-            return render_template('result2.html',
-                                   start_temperature=start_temp,
-                                   start_wind_speed=start_wind,
-                                   start_precipitation_probability=start_precipitation,
-                                   start_weather_condition=start_city_result,
-                                   end_temperature=end_temp,
-                                   end_wind_speed=end_speed,
-                                   end_precipitation_probability=end_precipitation,
-                                   end_weather_condition=end_city_result)
-        else:
-            return render_template('error.html', message="Ошибка получения данных о погоде.")
+        end_weather_data = get_city_weather_data(end_city, 1)
 
     return render_template('index2.html')
 
 
-#  Непосредственно запуск программы.
+@app.route('/graphs', methods=['GET'])
+def dashboard_page():
+    ...
+
+
+# #  Непосредственно запуск программы.
 if __name__ == '__main__':
     app.run(debug=True)
     dash_app.run(debug=True)

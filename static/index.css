@@ -17,6 +17,7 @@ body {
 
 .container {
     width: 60%;
+    height: 200vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,12 +35,12 @@ h1 {
 
 .form-block {
     padding: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 label {
     font-family: 'Intro', sans-serif;
-    font-size: 30px;
+    font-size: 28px;
     display: block;
     margin-bottom: 10px;
 }
@@ -52,12 +53,17 @@ input {
 }
 
 button {
+    display: block;
     font-family: 'Intro', sans-serif;
     background: None;
     border: 3px solid black;
     font-size: 22px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     transition: color 0.4s ease, border-color 0.4s ease;;
+}
+
+#start_city {
+    margin-bottom: 15px;
 }
 
 button:hover {
