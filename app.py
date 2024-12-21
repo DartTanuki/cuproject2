@@ -3,8 +3,11 @@ from flask import Flask, request, render_template, jsonify
 import requests
 import json
 
-#  Создаем объект нашего приложения.
+from dash import Dash, html
+
+#  Создаем объект нашего приложения и объект библиотеки Dash.
 app = Flask(__name__)
+dash_app = Dash(__name__, server=app)
 
 # API-ключ и ссылка для работы API.
 API_URL = 'http://dataservice.accuweather.com'
@@ -110,3 +113,4 @@ def index():
 #  Непосредственно запуск программы.
 if __name__ == '__main__':
     app.run(debug=True)
+    dash_app.run(debug=True)
