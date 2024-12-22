@@ -21,6 +21,18 @@
             </div>
             <br>
             <button type="button" id="create_point">Добавить город</button>
+
+            <label>Выберите количество дней прогноза:</label>
+            <div class="radio-menu">
+                <div class="radio-menu__item">
+                    <input type="radio" id="one_day" value='1' name="forecast_days" checked>
+                    <label for="one_day">1 День</label>
+                </div>
+                <div class="radio-menu__item">
+                    <input type="radio" id="5_days" value='5' name="forecast_days">
+                    <label for="5_days">5 дней</label>
+                </div>
+            </div>
             <button type="submit">Получить погоду</button>
         </form>
     </div>

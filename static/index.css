@@ -70,3 +70,8 @@ button:hover {
     color: red;
     border-color: #3e3a3a;
 }
+
+.radio-menu__item {
+    display: inline-block;
+    margin-right: 50px;
+}
